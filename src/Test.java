@@ -49,6 +49,7 @@ public class Test {
        linkedList.insertAtBeginning(15);
        //linkedList.insertAfter(11,17);
        linkedList.insertBefore(11,17);
+       //linkedList.delete(17);
        linkedList.display();
         System.out.println(linkedList.find(-1));
 

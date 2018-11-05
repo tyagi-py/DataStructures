@@ -2,7 +2,7 @@ package LinkedList;
 
 public class LinkedList<T> {
 
-    Node head;
+    private Node head;
     static  int size;
 
     public void insertAtBeginning(T data){
@@ -27,6 +27,8 @@ public class LinkedList<T> {
             Node newNode = new Node(data);
             t.nextNode = newNode;
         }
+        size++;
+
     }
 
     public void insertBefore(T key,T data){
@@ -47,6 +49,8 @@ public class LinkedList<T> {
             temp.nextNode=ex.nextNode;
             ex.nextNode=temp;
         }
+        size++;
+
     }
     public void insertAfter(T key,T data){
         Node t=head;
@@ -66,13 +70,33 @@ public class LinkedList<T> {
             t.nextNode=temp;
 
         }
+        size++;
+
     }
 
 
     public void delete(T d){
+        Node t=head;
+        Node prev=t;
+        while(t!=null&&t.data!=d){
+            prev=t;
+            t=t.nextNode;
+        }
+        if(t==null) try {
+            throw new Exception("Item not present");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        else{
+            prev.nextNode=t.nextNode;
+        }
+        size--;
 
     }
     public void display(){
+        if(head==null){
+            System.out.println("List is empty");
+        }
         Node t=head;
         while (t!=null){
             System.out.println(t.data);
@@ -80,6 +104,7 @@ public class LinkedList<T> {
         }
 
     }
+
     public boolean find(T key){
         Node t=head;
 
@@ -96,9 +121,10 @@ public class LinkedList<T> {
 
 
     }
+
     public void delete(){
         head=head.nextNode;
-        size++;
+        size--;
     }
 
 }
