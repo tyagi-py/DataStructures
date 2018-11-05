@@ -3,7 +3,7 @@ package LinkedList;
 public class LinkedList<T> {
 
     private Node head;
-    static  int size;
+    static  int size=0;
 
     public void insertAtBeginning(T data){
         if(head==null) head = new Node(data);
@@ -14,6 +14,7 @@ public class LinkedList<T> {
         }
         size++;
     }
+
     public void insertAtEnd(T data){
 
         if(head==null) head = new Node(data);
@@ -52,6 +53,7 @@ public class LinkedList<T> {
         size++;
 
     }
+
     public void insertAfter(T key,T data){
         Node t=head;
 
@@ -74,6 +76,35 @@ public class LinkedList<T> {
 
     }
 
+    public void insertAtPosition(int pos,T data){
+        if(pos>size){
+            try {
+                throw new Exception("position not in list");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Node t = head;
+            while(pos>2){
+                t=t.nextNode;
+                pos--;
+            }
+            Node temp =new Node(data);
+            temp.nextNode = t.nextNode;
+            t.nextNode = temp;
+        }
+    }
+
+    public <A> A midPoint(){
+        Node slow=head,fast=head;
+        while(fast!=null){
+            slow=slow.nextNode;
+            fast=fast.nextNode.nextNode;
+        }
+        return slow.data;
+
+    }
 
     public void delete(T d){
         Node t=head;
@@ -93,6 +124,7 @@ public class LinkedList<T> {
         size--;
 
     }
+
     public void display(){
         if(head==null){
             System.out.println("List is empty");

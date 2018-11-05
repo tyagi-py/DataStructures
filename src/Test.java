@@ -47,10 +47,14 @@ public class Test {
        linkedList.insertAtEnd(11);
        linkedList.insertAtEnd(13);
        linkedList.insertAtBeginning(15);
+       linkedList.insertAtBeginning(16);
+       linkedList.insertAtBeginning(25);
        //linkedList.insertAfter(11,17);
        linkedList.insertBefore(11,17);
+       linkedList.insertAtPosition(2,56);
        //linkedList.delete(17);
        linkedList.display();
+       linkedList.midPoint();
         System.out.println(linkedList.find(-1));
 
     }
