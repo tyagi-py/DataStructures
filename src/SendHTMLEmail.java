@@ -2,13 +2,26 @@ import java.util.Scanner;
 
 public class SendHTMLEmail{
     public static  void main(String args[]){
-        Scanner scanner =new Scanner(System.in);
-        int n =scanner.nextInt();
-        for (int i=n;i>0;i--){
-            for(int j=i;j<n+1;j++){
-                System.out.print(j);
-            }
-            System.out.println("");
+
+        int [] a={1,2,3,4};
+        for (int i=0;i<a.length;i++){
+
+            System.out.println(""+a[i]);
+        }
+        fun(a);
+        for (int i=0;i<a.length;i++){
+
+            System.out.println(""+a[i]);
         }
     }
+
+    static void fun(int[] aa){
+        for (int i=0;i<aa.length;i++){
+
+            aa[i] =0;
+        }
+
+    }
+
+
 }
