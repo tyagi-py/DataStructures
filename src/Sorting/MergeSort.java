@@ -12,21 +12,21 @@ public class MergeSort {
             array[i] = scanner.nextInt();
         }
         System.out.println("Sroted Array: ");
-        mergesort(array,0,array.length-1);
+        mergeSort(array,0,array.length-1);
         for(int i=0;i<array.length;i++){
             System.out.println(array[i]);
         }
 
     }
 
-    static void mergesort(int[] arr,int BEG,int END){
+    static void mergeSort(int[] arr, int BEG, int END){
 
         if(BEG>=END) return;
 
         int mid = (BEG + END)/2;
        // System.out.println("beg "+BEG+" End "+END+" mid "+mid);
-        mergesort(arr,BEG,mid);
-        mergesort(arr,mid+1,END);
+        mergeSort(arr,BEG,mid);
+        mergeSort(arr,mid+1,END);
         merge(arr,BEG,END);
     }
     static void merge(int[] arr,int BEG,int END){
