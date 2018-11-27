@@ -13,7 +13,7 @@ public class DFSAdjacencyMatrix {
 
 
     }
-    static void getGraph(){
+    public static void getGraph(){
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter No of n: ");
@@ -32,7 +32,7 @@ public class DFSAdjacencyMatrix {
             }
 
     }
-    static  void PrintHelper(int[][] edges,int sv, boolean[] visited){
+    private static  void PrintHelper(int[][] edges,int sv, boolean[] visited){
         System.out.println(sv);
         visited[sv] = true;
         for(int i=0; i<edges.length; i++){
@@ -41,7 +41,7 @@ public class DFSAdjacencyMatrix {
             }
         }
     }
-    static  void print(int[][] edges){
+    public static  void print(int[][] edges){
         boolean[] visited = new boolean[edges.length];
 
         for(int i=0;i<edges.length;i++){
