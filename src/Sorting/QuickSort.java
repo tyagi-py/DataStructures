@@ -49,6 +49,6 @@ public class QuickSort {
         }
         return pivot_pos;
     }
-    
+
 
 }
