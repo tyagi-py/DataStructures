@@ -8,8 +8,8 @@ public class BFS_Transverse {
         g.getGraph();
         print(g);
     }
+    static  Queue<Integer> q =new LinkedList<Integer>();
     static void printHelper(Graph graph,int si,boolean[] visited){
-        Queue<Integer> q =new LinkedList<Integer>();
 
         q.add(si);
         visited[si] =true;
