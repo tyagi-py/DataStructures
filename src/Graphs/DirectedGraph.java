@@ -2,7 +2,7 @@ package Graphs;
 
 import java.util.Scanner;
 
-public class WeightedGraph {
+public class DirectedGraph {
     int n,e;
     int[][] Edges;
 
@@ -15,17 +15,15 @@ public class WeightedGraph {
         System.out.println("Enter no of edges: ");
         e = scanner.nextInt();
         Edges = new int[n][n];
-        System.out.println("Enter Edges and Their weight: ");
+        System.out.println("Enter Edges: ");
 
 
         for(int j = 0; j< e; j++){
             int si = scanner.nextInt();
             int ei = scanner.nextInt();
-            int wt = scanner.nextInt();
-            Edges[si][ei] = wt;
-            Edges[ei][si] = wt;
+            Edges[si][ei] = 1;
+
         }
 
     }
-
 }
