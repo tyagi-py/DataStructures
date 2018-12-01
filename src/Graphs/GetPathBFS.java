@@ -24,7 +24,7 @@ public class GetPathBFS {
 
     }
 
-    static void getPath(Graph graph, int si, int ei) {
+    public static void getPath(Graph graph, int si, int ei) {
         if(si ==ei){
             arrayList.add(ei);
             return;

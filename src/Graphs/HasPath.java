@@ -16,7 +16,7 @@ public class HasPath {
         System.out.println(hasPath(graph, si, ei));
 
     }
-    static boolean hasPath(Graph graph,int si,int ei){
+    public static boolean hasPath(Graph graph,int si,int ei){
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[graph.n];
         queue.add(si);

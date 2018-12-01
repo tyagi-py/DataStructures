@@ -21,7 +21,7 @@ public class GetPathDFS {
 
     }
 
-    static void getPath(Graph graph, int si, int ei){
+    public static void getPath(Graph graph, int si, int ei){
 
         boolean visited[] = new boolean[graph.n];
 

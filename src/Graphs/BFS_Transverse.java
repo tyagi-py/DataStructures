@@ -9,7 +9,7 @@ public class BFS_Transverse {
         print(g);
     }
     static  Queue<Integer> q =new LinkedList<Integer>();
-    static void printHelper(Graph graph,int si,boolean[] visited){
+    private static void printHelper(Graph graph,int si,boolean[] visited){
 
         q.add(si);
         visited[si] =true;
@@ -25,7 +25,7 @@ public class BFS_Transverse {
             }
         }
     }
-    static void print(Graph graph){
+     public static void print(Graph graph){
         boolean[] visited = new boolean[graph.n];
 
         for(int i=0;i<graph.n;i++){
