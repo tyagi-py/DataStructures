@@ -1,9 +1,7 @@
 package BinaryTree;
 
 import javax.print.DocFlavor;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class BinaryTreeUse {
 
@@ -15,13 +13,18 @@ public class BinaryTreeUse {
 
         Scanner scanner = new Scanner(System.in);
         BTreeNode<Integer> root = takeInputIter();
-        printTree(root);
+        /*printTree(root);
         System.out.println("No of Nodes: " + countNodes(root));
         System.out.println("Diameter: "+diameter(root));
         System.out.println("Diameter Efficiently: "+heightDiameter(root).d);
         System.out.println("Height : "+ getHeight(root));
         System.out.println("PreOrder Transversal: ");
         preOrder(root);
+        int pre[] = {1,2,4,5,3,6,7};
+        int in[] = {4,2,5,1,6,3,7};
+        printTree(buildTree(in, pre));*/
+
+        System.out.println(getPath(root,new BTreeNode<Integer>(6)));
 
     }
     public static  BTreeNode<Integer> takeInput(Scanner scanner){
@@ -184,4 +187,57 @@ public class BinaryTreeUse {
         System.out.println(root.data);
         inOrder(root.right);
     }
+    public static BTreeNode<Integer> buildTree(int in[], int pre[]){
+
+        return buildTreeHelper(in, pre, 0, in.length-1, 0, pre.length-1);
+
+    }
+    private static BTreeNode<Integer> buildTreeHelper(int in[], int pre[], int inst, int inend, int prest, int preend){
+
+        if (inst > inend ) return null;
+
+        int r = pre[prest];
+        BTreeNode<Integer> root = new BTreeNode<>(r);
+        int rootIndx = -1;
+        for (int i = inst; i <= inend; i++){
+            if (in[i] == r){
+                rootIndx = i;
+                break;
+            }
+        }
+
+        int inleftst = inst;
+        int inleftend = rootIndx - 1;
+        int inrightst = rootIndx + 1;
+        int inrightend = inend;
+
+        int preleftst = prest + 1;
+        int preleftend = inleftend - inleftst + preleftst;
+        int prerightst = preleftend + 1;
+        int prerightend = preend;
+
+        root.left = buildTreeHelper(in, pre, inleftst, inleftend, preleftst, preleftend);
+        root.right = buildTreeHelper(in, pre, inrightst, inrightend, prerightst, prerightend);
+
+        return root;
+    }
+
+    private static ArrayList<Integer> a  = new ArrayList<>();
+    boolean flag = true;
+    public static boolean getPath(BTreeNode<Integer> root, BTreeNode<Integer> node){
+        if (root ==  null) return false;
+        a.add(root.data);
+        if (root.data == node.data) return true;
+
+        printa(a);
+        return getPath(root.left,node) | getPath(root.right,node);
+
+    }
+    private static void printa(ArrayList<Integer> a){
+        for (int i = 0; i < a.size(); i++){
+            System.out.print(a.get(i));
+        }
+        System.out.println("");
+    }
+
 }

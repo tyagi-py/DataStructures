@@ -48,7 +48,7 @@ public class MergeSort {
             }
             c++;
         }
-        if (i<mid){
+        if (i<=mid){
             while (i<=mid){
                 temp[c]=arr[i];
                 c++;
