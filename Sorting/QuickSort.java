@@ -42,7 +42,7 @@ public class QuickSort {
                     arr[i] = arr[j];
                     arr[j] = t;
                 }
-                else{
+                else{//CASE OF arr[j] >= arr[pivot_pos]
                     j--;
                 }
             }
