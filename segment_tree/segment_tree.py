@@ -14,6 +14,24 @@ def buildTree(arr, tree, start, end, tree_node):
 
     tree[tree_node] = tree[2*tree_node] + tree[2*tree_node +1]
 
-buildTree(arr, tree, 0, len(arr)-1, 1)
+def update_tree(arr, tree, start, end, tree_node, idx, val):
 
-print(*tree[1:])  
+    if start == end:
+        arr[idx] = val
+        tree[tree_node] = val
+        return
+    
+    mid = (start + end)//2
+    if idx > mid:
+        update_tree(arr, tree, mid+1, end, 2*tree_node, idx, val)
+    else:
+        update_tree(arr, tree, start, mid, 2*tree_node, idx, val)
+    
+    tree[tree_node] = tree[2*tree_node] + tree[2*tree_node +1]
+
+
+
+buildTree(arr, tree, 0, len(arr)-1, 1)
+update_tree(arr, tree, 0, len(arr)-1, 1, 2, 10)
+
+print(*tree[1:]) 
