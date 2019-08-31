@@ -24,20 +24,20 @@ def graph_input():
     print("Number of edges?")
     graph.e = int(sys.stdin.readline().strip())
 
-    for i in range(graph.e):
+    for _ in range(graph.e):
         f, s  = map(int, sys.stdin.readline().strip().split())
         graph.edges[f][s] = 1
         graph.edges[s][f] = 1
 
     return graph
 
-def print_graph(graph, sv):
+def print_graph_dfs(graph, sv):
 
-    visited = [False]*graph.v
+    visited = [False for i in range(graph.v)]
 
-    print_graph_helper(graph, sv, visited)
+    __print_graph_helper(graph, sv, visited)
 
-def print_graph_helper(graph, sv, visited):
+def __print_graph_helper(graph, sv, visited):
     print(sv)
     visited[sv] = True
 
@@ -45,16 +45,72 @@ def print_graph_helper(graph, sv, visited):
         if i ==  sv:
             continue
         if graph.edges[sv][i] == 1 and not visited[i]:
-            print_graph_helper(graph, i, visited)
+            __print_graph_helper(graph, i, visited)
             visited[i] = True
 
+import queue
+def print_graph_bfs(graph, sv):
+    
+    visited = [False for i in range(graph.v)]
 
+    q = queue.Queue(maxsize=0)
+    q.put(sv)
+    while not q.empty():
+        n = q.get()
+        print(n)
+        visited[n] = True
+        for i in range(graph.v):
+            if graph.edges[n][i] == 1 and not visited[i]:
+                q.put(i)
+                visited[i] = True
+
+import queue
+def has_path(graph, sv, e):
+    if sv == e:
+        return True
+    visited = [False for i in range(graph.v)]
+
+    q = queue.Queue(maxsize=0)
+    q.put(sv)
+    while not q.empty():
+        n = q.get()
+        if n == e:
+            return True
+        visited[n] = True
+        for i in range(graph.v):
+            if graph.edges[n][i] == 1 and not visited[i]:
+                q.put(i)
+                visited[i] = True
+
+    return False
+
+def get_path_helper(graph, st, en, visited):
+
+    if st == en:
+        return [en]
+
+    visited[st] = True
+
+    for i in range(graph.v):
+        if graph.edges[st][i] and not visited[i]:
+            small_out = get_path_helper(graph, i, en, visited)
+            if small_out is not None:
+                small_out.append(st)
+                return small_out
+    return None
+
+    
+        
+
+def get_path(graph, st, en):
+    visited = [False for i in range(graph.v)]
+    return get_path_helper(graph, st, en, visited)
 
 
 """ *******************Driver code **************** """
 
 graph = graph_input()
+print_graph_dfs(graph, 0)
 
-print_graph(graph, 1)
-
+print(get_path(graph,0, 3))
 
