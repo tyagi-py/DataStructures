@@ -6,14 +6,15 @@
 # tree: connected graph without a cycle
 # n vertices : minimum edges=0  if graph connected, min_edges = n-1
 # n vertices : if graph compelete min_edges = nC2 ie n(n-1)//2 ie O(n)
+import queue
+import sys
+
 class Graph:
     def __init__(self):
         self.v = None
         self.e = None
         self.vertices = None
         self.edges = None
-
-import sys
 
 """ take input from user and return a graph object """
 def graph_input():
@@ -48,7 +49,6 @@ def __print_graph_helper(graph, sv, visited):
             __print_graph_helper(graph, i, visited)
             visited[i] = True
 
-import queue
 def print_graph_bfs(graph, sv):
     
     visited = [False for i in range(graph.v)]
@@ -64,7 +64,6 @@ def print_graph_bfs(graph, sv):
                 q.put(i)
                 visited[i] = True
 
-import queue
 def has_path(graph, sv, e):
     if sv == e:
         return True
@@ -84,33 +83,64 @@ def has_path(graph, sv, e):
 
     return False
 
-def get_path_helper(graph, st, en, visited):
+def __get_path_helper_dfs(graph, st, en, visited):
 
     if st == en:
         return [en]
-
     visited[st] = True
-
     for i in range(graph.v):
         if graph.edges[st][i] and not visited[i]:
-            small_out = get_path_helper(graph, i, en, visited)
+            small_out = __get_path_helper_dfs(graph, i, en, visited)
             if small_out is not None:
                 small_out.append(st)
                 return small_out
     return None
 
-    
-        
-
-def get_path(graph, st, en):
+def get_path_dfs(graph, st, en):
     visited = [False for i in range(graph.v)]
-    return get_path_helper(graph, st, en, visited)
+    return __get_path_helper_dfs(graph, st, en, visited)
 
+def is_connected(graph):
+    import queue
+    visited = [False for i in range(graph.v)]
+
+    q = queue.Queue(maxsize=0)
+    q.put(0)
+    while not q.empty():
+        n = q.get()
+        visited[n] = True
+        for i in range(graph.v):
+            if graph.edges[n][i] == 1 and not visited[i]:
+                q.put(i)
+                visited[i] = True
+    if False in visited:
+        return False
+    else:
+        return True
+
+
+# TODO: commit on git 
+def get_components(graph):
+    visited = [False for i in range(graph.v)]
+    components = []
+    for i in range(graph.v):
+        if not visited[i]:
+            c = []
+            q = queue.Queue(maxsize=0)
+            q.put(i)
+            while not q.empty():
+                n = q.get()
+                c.append(n)
+                visited[n] = True
+                for i in range(graph.v):
+                    if graph.edges[n][i] == 1 and not visited[i]:
+                        q.put(i)
+                        visited[i] = True
+            components.append(c)       
+    return components
 
 """ *******************Driver code **************** """
 
 graph = graph_input()
-print_graph_dfs(graph, 0)
 
-print(get_path(graph,0, 3))
-
+print(get_components(graph))
