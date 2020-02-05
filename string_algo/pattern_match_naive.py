@@ -2,7 +2,7 @@ import sys
 
 s = sys.stdin.readline().strip()
 t = sys.stdin.readline().strip()
-flag = True
+flag   = True
 for i in range(len(s)-len(t)+1):
     j = i
     while j < len(t)+i:
